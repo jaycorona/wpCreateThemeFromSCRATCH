@@ -27,8 +27,12 @@ function jomarjaytheme_theme_setup(){
 add_action('init', 'jomarjaytheme_theme_setup' );
 
 add_theme_support('custom-background');  //adding background functions themes.php
-add_theme_support('custom-header');
-add_theme_support('post-thumbnails');
+add_theme_support('custom-header');  // adding header
+add_theme_support('post-thumbnails'); //featured images
+
+
+add_theme_support('post-formats', array('aside', 'image', 'video')); // ex. video, music.... which one you activate
+
 
 
 

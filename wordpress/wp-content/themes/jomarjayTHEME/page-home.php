@@ -2,34 +2,47 @@
 
 <div class="row">
 
-	<div class="col-xs-12">
-
-		<?php 
-
-				$args = array(
-					'type' => 'post',
-					'posts_per_page' => 3,
-				);
-
-				$lastBlog = new WP_Query($args);
+	<?php 
 			
+			$args_cat = array(
+				'include' => '6, 8, 7'
+			);
+			
+			$categories = get_categories($args_cat);
+			foreach($categories as $category):
+				
+				$args = array( 
+					'type' => 'post',
+					'posts_per_page' => 1,
+					'category__in' => $category->term_id,
+					'category__not_in' => array( 9 ),
+				);
+				
+				$lastBlog = new WP_Query( $args );
+				
 				if( $lastBlog->have_posts() ):
 					
 					while( $lastBlog->have_posts() ): $lastBlog->the_post(); ?>
 						
-						<?php get_template_part('content','featured'); ?>
+						<div class="col-xs-12 col-sm-4">
+						
+							<?php get_template_part('content','featured'); ?>
+						
+						</div>
 					
 					<?php endwhile;
 					
-				endif;	
+				endif;
+				
+				wp_reset_postdata();
+				
+			endforeach;
+		
+		?>
 
-				wp_reset_postdata(); // safe guard life saving functions reset 
-
-
-
-		 ?>
 		
 	</div>
+<div class="row">
 
 	<div class="col-xs-12 col-sm-8">
 	

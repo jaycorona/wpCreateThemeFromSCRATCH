@@ -3,26 +3,40 @@
 <div class="row">
 	<div class="col-xs-12 col-sm-8">
 	
+			<div class="row text-center">
 			<?php  
-			if( have_posts()):
+			if( have_posts()) : $i = 0;
 
 				while(have_posts()): the_post(); ?>
 
-						<?php get_template_part('content', get_post_format());   // by using this function need cxa ug slug, name create kog new file name.content.php ?>
+				<?php 
+					if($i==0): $column = 12; $class= ''; 
+					elseif($i > 0 && $i <= 2): $column = 6; $class = ' second-row-padding';
+					elseif($i > 2): $column = 4; $class = ' third-row-padding';
+					endif;
+				?>
+
+					<div class="col-xs-<?php echo $column; echo $class; ?>">
+						<?php if( has_post_thumbnail() ):
+							$urlImg = wp_get_attachment_url( get_post_thumbnail_id( get_the_ID() ) );
+						endif; ?>
+						<div class="blog-element" style="background-image: url(<?php echo $urlImg; ?>);">
+							
+							<?php the_title( sprintf('<h1 class="entry-title"><a href="%s">', esc_url( get_permalink() ) ),'</a></h1>' ); ?>
+							
+							<small><?php the_category(' '); ?></small>
+						</div>
+					</div>
 
 
-				<!-- 	<h3><?php the_title(); ?></h3>
-					<div class="thumbnail-img"><?php the_post_thumbnail('thumbnail'); ?></div>	
-					<small>Posted on: <?php the_time('F j, Y'); ?> at <?php  the_time('g:i a' ); ?>, in <?php  the_category();?></small>
-					<p><?php the_content(); ?></p>
-					
-					<hr> -->
-
-			<?php	endwhile;
+			
+			<?php  $i++;	endwhile;
 
 		 		endif;	
 
 			 ?>
+			</div>
+
 	</div>
 
 		<div class="col-xs-12 col-sm-4">

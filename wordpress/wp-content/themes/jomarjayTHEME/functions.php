@@ -83,6 +83,23 @@ function jomarjaytheme_wiget_sidebar(){
 
 
 
+/*
+	==========================================
+	 Category function
+	==========================================
+*/
+
+function example_insert_category() {
+  wp_insert_term(
+    'Example Category',
+    'category',
+    array(
+      'description' => 'This is an example category created with wp_insert_term.',
+      'slug'    => 'example-category'
+    )
+  );
+}
+add_action( 'after_setup_theme', 'example_insert_category' );
 
 
 

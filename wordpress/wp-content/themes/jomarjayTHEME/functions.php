@@ -53,6 +53,9 @@ add_theme_support('post-thumbnails'); //featured images
 
 add_theme_support('post-formats', array('aside', 'image', 'video')); // ex. video, music.... which one you activate
 
+add_theme_support('html5',array('search-form'));
+
+
 
 
 /*
@@ -107,13 +110,11 @@ add_action( 'after_setup_theme', 'example_insert_category' );
 
 
 
+/*
+( $comment->user_id === $post->post_author  ? '<span> ' . __( 'Editor', 'jomarjaytheme' ) . '</span>' : '');
 
-
-
-
-
-
-
+ wp_list_comments( array( 'callback' => 'jomarjaytheme_comment', 'style' => 'ol' ) ); 
+*/
 
 
 

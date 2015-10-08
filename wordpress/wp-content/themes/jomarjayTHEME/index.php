@@ -5,6 +5,13 @@
 	
 			<div class="row text-center">
 			<?php  
+
+			/*By customizing Blog pages show at most 3 posts*/
+			$currentPage = (get_query_var('paged')) ? get_query_var('paged') : 1;
+			$args = array('posts_per_page' => 3, 'paged' => $currentPage);
+			query_posts($args);
+
+
 			if( have_posts()) : $i = 0;
 
 				while(have_posts()): the_post(); ?>
@@ -30,9 +37,19 @@
 
 
 			
-			<?php  $i++;	endwhile;
+			<?php  $i++;	endwhile; ?>
+			<!-- pagination blog post page -->
+					<div class="col-xs-6 text-left">
+						<?php next_posts_link('< Older Post'); ?>
+					</div>
+					<div class="col-xs-6 text-right">
+						<?php previous_posts_link('Newer Posts >'); ?>
+					</div>
 
-		 		endif;	
+
+		 	<?php	endif;	
+
+				wp_reset_query();
 
 			 ?>
 			</div>
